@@ -1,1 +1,25 @@
-{"license": "", "preferences": [{"title": "The Quality of thumbnail to use.", "type": "string", "name": "thumbnailQuality", "value": "hq", "description": "leave blank for default or mq, hq, max"}], "contributors": [], "author": "youarefunny", "url": "", "name": "youtube-embed2link", "dependencies": ["api-utils", "addon-kit"], "version": "1.2", "lib": "lib", "fullName": "YouTube Embed2Link", "main": "main", "id": "youtube-e2l", "description": "This addon converts embeded videos into links to the video on YouTube.  Great for mobile deivces so you can watch the video in the YouTube app."}
+{
+	"name": "youtube-embed2link",
+	"fullName": "YouTube Embed2Link",
+	"description": "This addon converts embeded videos into links to the video on YouTube.  Great for mobile deivces so you can watch the video in the YouTube app.",
+
+	"author": "youarefunny",
+	"contributors": [],
+
+	"id": "youtube-e2l",
+	"version": "1.3",
+	"lib": "lib",
+	"main": "main",
+
+	"preferences": [{
+		"title": "The Quality of thumbnail to use.",
+		"type": "string",
+		"name": "thumbnailQuality",
+		"value": "hq",
+		"description": "leave blank for default or mq, hq, max"}
+	],
+
+	"license": "zlib",
+	"url": "https://github.com/kevincox/youtube-e2l",
+	"dependencies": ["api-utils", "addon-kit"]
+}
