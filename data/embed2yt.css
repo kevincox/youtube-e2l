@@ -1,0 +1,14 @@
+.embed2yt {
+    display: block;
+    padding: 0.2em !important;
+    
+    color: white !important;
+    text-decoration: none !important;
+    font: 1.7em helvetica !important;
+    text-align: left;
+    
+    background-color: black;
+    background-size: auto, cover;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center center;
+}
