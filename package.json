@@ -15,9 +15,15 @@
 		"title": "The Quality of thumbnail to use.",
 		"type": "string",
 		"name": "thumbnailQuality",
-		"value": "hq",
-		"description": "leave blank for default or mq, hq, max"}
-	],
+		"value": "hqDefault",
+		"description": "default or hqDefault."
+	},{
+		"title": "The URL to link to.  '%vid%' will be replaced with the video ID.",
+		"type": "string",
+		"name": "url",
+		"value": "",
+		"description": "Try: '//youtu.be/%vid%', '//youtube.com/watch?v=%vid%' and on Android, 'vnd.youtube:%vid%'."
+	}],
 
 	"license": "zlib",
 	"url": "https://github.com/kevincox/youtube-e2l",
