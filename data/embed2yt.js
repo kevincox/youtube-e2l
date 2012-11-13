@@ -31,7 +31,7 @@ for ( i in frames )
 		req.open('GET', 'https://gdata.youtube.com/feeds/api/videos/'+vid+'?v=2&alt=jsonc');
 		req.responseType = "json";
 		req.onload = function(e) {
-			tn.innerHTML = req.response.data.title;
+			tn.textContent = req.response.data.title;
 
 			tn.style.backgroundImage = "url("+self.options.playIcon+")," +
 			                           "url("+req.response.data.thumbnail[self.options.pref.thumbnailQuality]+")";
