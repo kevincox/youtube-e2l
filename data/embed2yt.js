@@ -1,4 +1,4 @@
-var ytre = new RegExp("(https?://)(www\\.)?youtube.com/embed/([^/]*)","i");
+var ytre = new RegExp("(https?://)(www\\.)?youtube(-nocookie)?.com/embed/([^/]*)","i");
 
 var framesel = document.getElementsByTagName("iframe");
 
@@ -12,9 +12,7 @@ for ( i in frames )
 	var r = f.src.match(ytre);
 	if (r)
 	{
-		let ptl = r[1];
-		let www = r[2];
-		let vid = r[3];
+		let vid = r[4];
 
 		let tn = document.createElement("a");
 		tn.href = self.options.pref.url.replace("%vid%", vid);
@@ -28,6 +26,7 @@ for ( i in frames )
 		f.parentNode.removeChild(f);
 
 		let req = new XMLHttpRequest();
+		console.log('https://gdata.youtube.com/feeds/api/videos/'+vid+'?v=2&alt=jsonc')
 		req.open('GET', 'https://gdata.youtube.com/feeds/api/videos/'+vid+'?v=2&alt=jsonc');
 		req.responseType = "json";
 		req.onload = function(e) {
