@@ -17,7 +17,7 @@ for ( i in frames )
 		let tn = document.createElement("a");
 		tn.href = self.options.pref.url.replace("%vid%", vid);
 
-		tn.className = "embed2yt";
+		tn.className = "embed2yt-thumbnail";
 		tn.style.display = "block";
 		tn.style.width  = f.width + "px";
 		tn.style.height = f.height + "px";
@@ -26,11 +26,14 @@ for ( i in frames )
 		f.parentNode.removeChild(f);
 
 		let req = new XMLHttpRequest();
-		console.log('https://gdata.youtube.com/feeds/api/videos/'+vid+'?v=2&alt=jsonc')
 		req.open('GET', 'https://gdata.youtube.com/feeds/api/videos/'+vid+'?v=2&alt=jsonc');
 		req.responseType = "json";
 		req.onload = function(e) {
-			tn.textContent = req.response.data.title;
+			var t = document.createElement("div");
+			t.textContent = req.response.data.title;
+			t.className = "embed2yt-title"
+			tn.style.display = "block";
+			tn.appendChild(t);
 
 			tn.style.backgroundImage = "url("+self.options.playIcon+")," +
 			                           "url("+req.response.data.thumbnail[self.options.pref.thumbnailQuality]+")";
