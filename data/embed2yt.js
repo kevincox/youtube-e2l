@@ -1,4 +1,4 @@
-var ytre = new RegExp("(https?://)(www\\.)?youtube(-nocookie)?.com/embed/([^/?#]*)","i");
+var ytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/embed/([^/?#]*).*$","i");
 
 var framesel = document.getElementsByTagName("iframe");
 
