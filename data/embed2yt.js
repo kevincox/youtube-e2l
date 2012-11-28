@@ -27,20 +27,20 @@ function replaceWithThumbnail ( info )
 	req.send();
 }
 
+var infolist = [];
+
 var ytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/embed/([^/?#]*).*$","i");
 
-var elements = [];
-var framesel = document.getElementsByTagName("iframe");
-for ( i in framesel )           // When we removed the frames element list they
-	elements.push(framesel[i]); // disappear from the list causing index errors.
-
-for ( i in elements )
+var frames = document.getElementsByTagName("iframe");
+console.log(frames.length);
+for ( i in frames )
 {
-	let f = elements[i];
+	var f = frames[i];
+	if ( f.tagName != "IFRAME" ) continue; // We are also getting properties.
 	var r = f.src.match(ytre);
 	if (r)
 	{
-		replaceWithThumbnail({
+		infolist.push({
 			id: r[4],
 			replace: f,
 			width:  f.width  + "px",
@@ -51,20 +51,18 @@ for ( i in elements )
 
 var oytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/v/([^/?#]*).*$","i");
 
-var elements = [];
-var objectsel = document.getElementsByTagName("object");
-for ( i in objectsel )           // When we removed the frames element list they
-	elements.push(objectsel[i]); // disappear from the list causing index errors.
-
-for ( i in elements )
+var objects = document.getElementsByTagName("object");
+console.log(objects.length);
+for ( i in objects )
 {
-	var o = elements[i];
+	var o = objects[i];
+	if ( o.tagName != "OBJECT" ) continue; // We are also getting properties.
 	var e = o.getElementsByTagName("embed")[0];
-	
+
 	var r = e.src.match(oytre);
 	if (r)
 	{
-		replaceWithThumbnail({
+		infolist.push({
 			id: r[4],
 			replace: o,
 			width:  o.width  + "px",
@@ -72,3 +70,6 @@ for ( i in elements )
 		});
 	}
 };
+
+for ( i in infolist )
+	replaceWithThumbnail(infolist[i]);
