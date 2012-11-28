@@ -32,7 +32,6 @@ var infolist = [];
 var ytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/embed/([^/?#]*).*$","i");
 
 var frames = document.getElementsByTagName("iframe");
-console.log(frames.length);
 for ( i in frames )
 {
 	var f = frames[i];
@@ -52,7 +51,6 @@ for ( i in frames )
 var oytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/v/([^/?#]*).*$","i");
 
 var objects = document.getElementsByTagName("object");
-console.log(objects.length);
 for ( i in objects )
 {
 	var o = objects[i];
