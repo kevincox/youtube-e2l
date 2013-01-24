@@ -27,47 +27,60 @@ function replaceWithThumbnail ( info )
 	req.send();
 }
 
-var infolist = [];
 
 var ytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/embed/([^/?#]*).*$","i");
-
-var frames = document.getElementsByTagName("iframe");
-for ( i in frames )
-{
-	var f = frames[i];
-	if ( f.tagName != "IFRAME" ) continue; // We are also getting properties.
-	var r = f.src.match(ytre);
-	if (r)
-	{
-		infolist.push({
-			id: r[4],
-			replace: f,
-			width:  f.width  + "px",
-			height: f.height + "px",
-		});
-	}
-}
-
 var oytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/v/([^/?#]*).*$","i");
 
-var objects = document.getElementsByTagName("object");
-for ( i in objects )
+function scanElement(ele)
 {
-	var o = objects[i];
-	if ( o.tagName != "OBJECT" ) continue; // We are also getting properties.
-	var e = o.getElementsByTagName("embed")[0];
+	var infolist = [];
 
-	var r = e.src.match(oytre);
-	if (r)
+	var frames = ele.getElementsByTagName("iframe");
+	for ( i in frames )
 	{
-		infolist.push({
-			id: r[4],
-			replace: o,
-			width:  o.width  + "px",
-			height: o.height + "px",
-		});
+		var f = frames[i];
+		if ( f.tagName != "IFRAME" ) continue; // We are also getting properties.
+		var r = f.src.match(ytre);
+		if (r)
+		{
+			infolist.push({
+				id: r[4],
+				replace: f,
+				width:  f.width  + "px",
+				height: f.height + "px",
+			});
+		}
 	}
-};
 
-for ( i in infolist )
-	replaceWithThumbnail(infolist[i]);
+	var objects = ele.getElementsByTagName("object");
+	for ( i in objects )
+	{
+		var o = objects[i];
+		if ( o.tagName != "OBJECT" ) continue; // We are also getting properties.
+		var e = o.getElementsByTagName("embed")[0];
+
+		var r = e.src.match(oytre);
+		if (r)
+		{
+			infolist.push({
+				id: r[4],
+				replace: o,
+				width:  o.width  + "px",
+				height: o.height + "px",
+			});
+		}
+	};
+
+	for ( i in infolist )
+		replaceWithThumbnail(infolist[i]);
+}
+
+///// Listen for New Elements popping up.
+var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        scanElement(mutation.target);
+    });
+});
+
+// pass in the target node, as well as the observer options
+observer.observe(document, { childList: true, subtree: true });
