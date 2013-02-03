@@ -59,7 +59,12 @@ function scanElement(ele)
 		if ( o.tagName != "OBJECT" ) continue; // We are also getting properties.
 		var e = o.getElementsByTagName("embed")[0];
 
-		var r = e.src.match(oytre);
+		var url;
+		if      (e)      url = e.src;
+		else if (o.data) url = o.data;
+		else             url = "";
+
+		var r = url.match(oytre);
 		if (r)
 		{
 			infolist.push({
@@ -75,7 +80,6 @@ function scanElement(ele)
 		replaceWithThumbnail(infolist[i]);
 }
 
-///// Listen for New Elements popping up.
 var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
         scanElement(mutation.target);
