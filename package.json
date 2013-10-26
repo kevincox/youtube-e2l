@@ -3,11 +3,11 @@
 	"fullName": "YouTube Embed2Link",
 	"description": "This addon converts embeded videos into links to the video on YouTube.  Great for mobile deivces so you can watch the video in the YouTube app.",
 
-	"author": "youarefunny",
+	"author": "Kevin Cox <kevincox@kevincox.ca>",
 	"contributors": [],
 
 	"id": "youtube-e2l",
-	"version": "1.9.2",
+	"version": "1.9.3",
 	"lib": "lib",
 	"main": "main",
 
