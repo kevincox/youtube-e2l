@@ -1,15 +1,15 @@
 .embed2yt-thumbnail {
 	padding: 0 !important;
 	box-sizing: border-box; /* So that the margins don't change the size. */
-
+	
 	overflow: none;
 	white-space: nowrap;
-
+	
 	color: white !important;
 	text-decoration: none !important;
 	font: 1.7em helvetica !important;
 	text-align: left;
-
+	
 	background-color: black;
 	background-size: auto, cover;
 	background-repeat: no-repeat, no-repeat;

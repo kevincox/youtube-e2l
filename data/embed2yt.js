@@ -2,15 +2,15 @@ function replaceWithThumbnail ( info )
 {
 	let tn = document.createElement("a");
 	tn.href = self.options.pref.url.replace("%vid%", info.id);
-
+	
 	tn.className = "embed2yt-thumbnail";
 	tn.style.display = "block";
 	tn.style.width  = info.width;
 	tn.style.height = info.height;
-
+	
 	info.replace.parentNode.insertBefore(tn, info.replace);
 	info.replace.parentNode.removeChild(info.replace);
-
+	
 	let req = new XMLHttpRequest();
 	req.open('GET', 'https://gdata.youtube.com/feeds/api/videos/'+info.id+'?v=2&alt=jsonc');
 	req.responseType = "json";
@@ -20,7 +20,7 @@ function replaceWithThumbnail ( info )
 		t.className = "embed2yt-title"
 		tn.style.display = "block";
 		tn.appendChild(t);
-
+		
 		tn.style.backgroundImage = "url("+self.options.playIcon+")," +
 		                           "url("+req.response.data.thumbnail[self.options.pref.thumbnailQuality]+")";
 	};
@@ -34,7 +34,7 @@ var oytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/v/([^/?#&]*
 function scanElement(ele)
 {
 	var infolist = [];
-
+	
 	var frames = ele.getElementsByTagName("iframe");
 	for ( i in frames )
 	{
@@ -51,19 +51,19 @@ function scanElement(ele)
 			});
 		}
 	}
-
+	
 	var objects = ele.getElementsByTagName("object");
 	for ( i in objects )
 	{
 		var o = objects[i];
 		if ( o.tagName != "OBJECT" ) continue; // We are also getting properties.
 		var e = o.getElementsByTagName("embed")[0];
-
+		
 		var url;
 		if      (e)      url = e.src;
 		else if (o.data) url = o.data;
 		else             url = "";
-
+		
 		var r = url.match(oytre);
 		if (r)
 		{
@@ -75,7 +75,7 @@ function scanElement(ele)
 			});
 		}
 	};
-
+	
 	for ( i in infolist )
 		replaceWithThumbnail(infolist[i]);
 }

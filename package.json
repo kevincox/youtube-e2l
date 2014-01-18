@@ -2,15 +2,15 @@
 	"name": "youtube-embed2link",
 	"fullName": "YouTube Embed2Link",
 	"description": "This addon converts embeded videos into links to the video on YouTube.  Great for mobile deivces so you can watch the video in the YouTube app.",
-
+	
 	"author": "Kevin Cox <kevincox@kevincox.ca>",
 	"contributors": [],
-
+	
 	"id": "youtube-e2l",
 	"version": "1.9.4pre",
 	"lib": "lib",
 	"main": "main",
-
+	
 	"preferences": [{
 		"title": "The Quality of thumbnail to use.",
 		"type": "string",
@@ -24,7 +24,7 @@
 		"value": "",
 		"description": "Try: '//youtu.be/%vid%', '//youtube.com/watch?v=%vid%' and on Android, 'vnd.youtube:%vid%'."
 	}],
-
+	
 	"license": "zlib",
 	"url": "https://github.com/kevincox/youtube-e2l",
 	"dependencies": ["api-utils", "addon-kit"]
