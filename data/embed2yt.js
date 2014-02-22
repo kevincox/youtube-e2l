@@ -81,9 +81,9 @@ function scanElement(ele)
 }
 
 var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-        scanElement(mutation.target);
-    });
+	mutations.forEach(function(mutation) {
+		scanElement(mutation.target);
+	});
 });
 
 // pass in the target node, as well as the observer options
