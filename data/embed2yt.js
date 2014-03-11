@@ -4,7 +4,6 @@ function replaceWithThumbnail ( info )
 	tn.href = self.options.pref.url.replace("%vid%", info.id);
 	
 	tn.className = "embed2yt-thumbnail";
-	tn.style.display = "block";
 	tn.style.width  = info.width;
 	tn.style.height = info.height;
 	
@@ -18,7 +17,6 @@ function replaceWithThumbnail ( info )
 		var t = document.createElement("div");
 		t.textContent = req.response.data.title;
 		t.className = "embed2yt-title"
-		tn.style.display = "block";
 		tn.appendChild(t);
 		
 		tn.style.backgroundImage = "url("+self.options.playIcon+")," +
@@ -26,7 +24,6 @@ function replaceWithThumbnail ( info )
 	};
 	req.send();
 }
-
 
 var ytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/embed/([^/?#&]*).*$","i");
 var oytre = new RegExp("^(https?://)(www\\.)?youtube(-nocookie)?.com/v/([^/?#&]*).*$","i");
