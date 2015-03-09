@@ -3,7 +3,9 @@ function replaceWithThumbnail ( info )
 	let tn = document.createElement("a");
 	tn.href = self.options.pref.url.replace("%vid%", info.id);
 	
-	//tn.className = "embed2yt-thumbnail";
+	tn.className = "embed2yt-thumbnail";
+
+	// Start of workaround for https://bugzil.la/1107240
 	tn.style.padding = "0px";
 	tn.style.boxSizing = "border-box";
 	tn.style.display = "block";
@@ -18,6 +20,7 @@ function replaceWithThumbnail ( info )
 	tn.style.backgroundRepeat = "no-repeat, no-repeat";
 	tn.style.backgroundPosition = "center center";
 	tn.style.backgroundRepeat = "no-repeat, no-repeat";
+	// End of workaround
 
 	tn.style.width  = info.width;
 	tn.style.height = info.height;
@@ -31,9 +34,13 @@ function replaceWithThumbnail ( info )
 	req.onload = function(e) {
 		var t = document.createElement("div");
 		t.textContent = req.response.data.title;
-		//t.className = "embed2yt-title";
+		t.className = "embed2yt-title";
+
+		// Start of workaround for https://bugzil.la/1107240
 		t.style.background = "hsla(0, 0%, 0%, 0.5)";
 		t.style.padding = "0 0.4em";
+		// End of workaround
+
 		tn.appendChild(t);
 		
 		tn.style.backgroundImage = "url("+self.options.playIcon+")," +
