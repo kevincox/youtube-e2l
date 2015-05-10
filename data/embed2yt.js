@@ -29,11 +29,11 @@ function replaceWithThumbnail ( info )
 	info.replace.parentNode.removeChild(info.replace);
 	
 	let req = new XMLHttpRequest();
-	req.open('GET', 'https://gdata.youtube.com/feeds/api/videos/'+info.id+'?v=2&alt=jsonc');
+	req.open('GET', 'http://www.youtube.com/oembed?format=json&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D' + info.id);
 	req.responseType = "json";
 	req.onload = function(e) {
 		var t = document.createElement("div");
-		t.textContent = req.response.data.title;
+		t.textContent = req.response.title;
 		t.className = "embed2yt-title";
 
 		// Start of workaround for https://bugzil.la/1107240
@@ -44,7 +44,7 @@ function replaceWithThumbnail ( info )
 		tn.appendChild(t);
 		
 		tn.style.backgroundImage = "url("+self.options.playIcon+")," +
-		                           "url("+req.response.data.thumbnail[self.options.pref.thumbnailQuality]+")";
+								   "url('" + req.response.thumbnail_url + "')";
 	};
 	req.send();
 }
