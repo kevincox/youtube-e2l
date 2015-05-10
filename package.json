@@ -7,23 +7,21 @@
 	"contributors": [],
 	
 	"id": "youtube-e2l",
-	"version": "1.9.7pre",
+	"version": "1.9.8pre",
 	"lib": "lib",
 	"main": "main",
 	
 	"preferences": [{
-		"title": "The Quality of thumbnail to use.",
-		"type": "string",
-		"name": "thumbnailQuality",
-		"value": "hqDefault",
-		"description": "default or hqDefault."
-	},{
 		"title": "The URL to link to.  '%vid%' will be replaced with the video ID.",
 		"type": "string",
 		"name": "url",
 		"value": "",
 		"description": "Try: '//youtu.be/%vid%', '//youtube.com/watch?v=%vid%' and on Android, 'vnd.youtube:%vid%'."
 	}],
+	
+	"permissions": {
+		"cross-domain-content": ["http://www.youtube.com"]
+	},
 	
 	"license": "zlib",
 	"url": "https://github.com/kevincox/youtube-e2l",
