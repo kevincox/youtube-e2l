@@ -1,3 +1,16 @@
+const GOOGLE_API_KEY = "AIzaSyAckH3jasRbe8gTqwAQSVrmidcdrTgsmPk";
+const QUALITYMAP = {
+	low:       "default",
+	default:   "default",
+	medium:    "medium",
+	high:      "high",
+	hqDefault: "high",
+};
+
+function qualityKey() {
+	return QUALITYMAP[self.options.pref.thumbnailQuality];
+}
+
 function replaceWithThumbnail ( info )
 {
 	let tn = document.createElement("a");
@@ -28,12 +41,18 @@ function replaceWithThumbnail ( info )
 	info.replace.parentNode.insertBefore(tn, info.replace);
 	info.replace.parentNode.removeChild(info.replace);
 	
+	var url = "https://www.googleapis.com/youtube/v3/videos?part=snippet" +
+	          "&id=" + info.id +
+	          "&key=" + GOOGLE_API_KEY;
 	let req = new XMLHttpRequest();
-	req.open('GET', 'https://gdata.youtube.com/feeds/api/videos/'+info.id+'?v=2&alt=jsonc');
+	req.open('GET', url);
+	
 	req.responseType = "json";
 	req.onload = function(e) {
 		var t = document.createElement("div");
-		t.textContent = req.response.data.title;
+		var data = req.response.items[0];
+		console.log(data);
+		t.textContent = data.snippet.title;
 		t.className = "embed2yt-title";
 
 		// Start of workaround for https://bugzil.la/1107240
@@ -43,8 +62,10 @@ function replaceWithThumbnail ( info )
 
 		tn.appendChild(t);
 		
+		var thumb = data.snippet.thumbnails[qualityKey()];
+		
 		tn.style.backgroundImage = "url("+self.options.playIcon+")," +
-		                           "url("+req.response.data.thumbnail[self.options.pref.thumbnailQuality]+")";
+		                           "url("+thumb.url+")";
 	};
 	req.send();
 }
