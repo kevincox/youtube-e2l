@@ -49,17 +49,17 @@ function replaceWithThumbnail ( info )
 	
 	req.responseType = "json";
 	req.onload = function(e) {
-		var t = document.createElement("div");
 		var data = req.response.items[0];
-		console.log(data);
+		
+		var t = document.createElement("div");
 		t.textContent = data.snippet.title;
 		t.className = "embed2yt-title";
-
+		
 		// Start of workaround for https://bugzil.la/1107240
 		t.style.background = "hsla(0, 0%, 0%, 0.5)";
 		t.style.padding = "0 0.4em";
 		// End of workaround
-
+		
 		tn.appendChild(t);
 		
 		var thumb = data.snippet.thumbnails[qualityKey()];
